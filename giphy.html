@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+
+
+	<title>Giphy Homework</title>
+
+</head>
+<body>
+
+	<div><h2>Some of my favorite comedians</h2></div>
+
+		<button data-search="dave chappelle">Dave Chappelle</button>
+		<button data-search="paul mooney">Paul Mooney</button>
+		<button data-search="eddie murphy">Eddie Murphy</button>
+		<button data-search="amy schumer">Amy Schumer</button>
+		<button data-search="chris rock">Chris Rock</button>
+		<button data-search="aziz ansari">Aziz Ansari</button>
+		
+		<div class="images"></div>
+	
+	<script type="text/javascript">
+	
+	$('button').on('click', function(){
+	 var x=$(this).data('search');
+	 //console.log(x);
+
+	var queryURL = 'https://api.giphy.com/v1/gifs/search?q='+x+'&api_key=dc6zaTOxFJmzC&limit=10';
+	//console.log(queryURL);
+
+		$.ajax({url:queryURL,method:'GET'})
+			
+			.done(function(response){
+			//console.log(response);
+			
+			$('.images').empty();
+			for (var i = 0; i < response.data.length; i++){
+			$('.images').append('<p>Rating:'+response.data[i].rating+'</p>');
+			$('.images').append("<img src=' "+response.data[i].images.downsized.url+"'>");	
+			}
+			
+		})
+});
+
+</script>
+
+</body>
+</html>
